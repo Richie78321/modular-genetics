@@ -17,6 +17,7 @@ namespace MDLG
 		int AddToGenome(int bit_count);
 
 		int get_genome_size() const;
+		const boost::dynamic_bitset<>* get_genome() const;
 	
 	private:
 		int genome_size = 0;

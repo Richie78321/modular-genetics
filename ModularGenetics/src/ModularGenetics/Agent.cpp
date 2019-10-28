@@ -47,4 +47,8 @@ namespace MDLG
 	{
 		return this->genome_size;
 	}
+	const boost::dynamic_bitset<>* Agent::get_genome() const
+	{
+		return this->genome;
+	}
 }

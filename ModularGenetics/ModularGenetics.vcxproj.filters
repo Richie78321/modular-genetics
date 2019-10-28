@@ -24,9 +24,15 @@
     <ClInclude Include="src\ModularGenetics\Agent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ModularGenetics\GeneticSequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ModularGenetics\Agent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModularGenetics\GeneticSequence.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
