@@ -9,7 +9,6 @@ namespace MDLG
 	class MDLG_API Agent
 	{
 	public:
-		Agent(std::vector<int> genome_lengths);
 		Agent();
 		~Agent();
 
