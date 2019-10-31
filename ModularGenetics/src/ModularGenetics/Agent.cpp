@@ -1,54 +1,68 @@
 #include "Agent.h"
-#include <string>
+#include <exception>
 #include <random>
 
 namespace MDLG
 {
+	Agent::Agent(std::vector<int> genome_lengths)
+	{
+		this->genome_lengths = genome_lengths;
+	}
+
 	Agent::Agent()
 	{
 	}
 
-	Agent::~Agent()
+	int Agent::AddSequence(int length)
 	{
-		delete this->genome;
+		this->genome_lengths.push_back(length);
+		return this->genome_lengths.size() - 1;
 	}
 
-	void Agent::SetGenome(boost::dynamic_bitset<>* genome)
+	void Agent::AddGenome(std::vector<boost::dynamic_bitset<>> genome, bool ensure_length_compliance)
 	{
-		if (genome->size() != this->genome_size)
+		if (ensure_length_compliance)
 		{
-			throw std::invalid_argument("Genome does not match target length of agent genome!");
+			//Verify length
+			if (genome.size() != genome_lengths.size())
+			{
+				throw std::invalid_argument("Genome does not comply with agent genome length.");
+			}
+
+			for (int i = 0; i < genome.size(); i++)
+			{
+				if (genome[i].size() != genome_lengths[i])
+				{
+					throw std::invalid_argument("Genome does not comply with agent genome length.");
+				}
+			}
 		}
+
 		this->genome = genome;
 	}
 
-	void Agent::SetGenome(int seed)
+	void Agent::GenerateRandomGenome(int seed)
 	{
-		//Generate genome randomly
-		std::string genome_string = "";
-		std::mt19937 gen(seed);
-		std::uniform_int_distribution<> dis(1, 2);
-		for (int i = 0; i < this->genome_size; i++)
+		this->genome.clear();
+		for (int i = 0; i < this->genome_lengths.size(); i++)
 		{
-			genome_string += std::to_string(dis(gen) % 2);
+			std::string genome_string = "";
+			std::mt19937 gen(seed);
+			std::uniform_int_distribution<> dis(1, 2);
+			for (int j = 0; j < this->genome_lengths[i]; j++)
+			{
+				genome_string += std::to_string(dis(gen) % 2);
+			}
+			this->genome.push_back(boost::dynamic_bitset<>(genome_string));
 		}
-		this->genome = new boost::dynamic_bitset<>(genome_string);
 	}
 
-	int Agent::AddToGenome(int bit_count)
+	const std::vector<boost::dynamic_bitset<>>* Agent::get_genome() const
 	{
-		int start_position = this->genome_size;
-		this->genome_size += bit_count;
-
-		return start_position;
+		return &this->genome;
 	}
 
-	int Agent::get_genome_size() const
+	Agent::~Agent()
 	{
-		return this->genome_size;
-	}
-	const boost::dynamic_bitset<>* Agent::get_genome() const
-	{
-		return this->genome;
 	}
 }

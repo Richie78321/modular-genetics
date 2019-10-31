@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include <vector>
 #include <boost\dynamic_bitset.hpp>
 
 namespace MDLG
@@ -8,20 +9,17 @@ namespace MDLG
 	class MDLG_API Agent
 	{
 	public:
+		Agent(std::vector<int> genome_lengths);
 		Agent();
 		~Agent();
 
-		void SetGenome(boost::dynamic_bitset<>* genome);
-		void SetGenome(int seed);
+		int AddSequence(int length);
+		void AddGenome(std::vector<boost::dynamic_bitset<>> genome, bool ensure_length_compliance = true);
+		void GenerateRandomGenome(int seed);
+		const std::vector<boost::dynamic_bitset<>>* get_genome() const;
 
-		int AddToGenome(int bit_count);
-
-		int get_genome_size() const;
-		const boost::dynamic_bitset<>* get_genome() const;
-	
 	private:
-		int genome_size = 0;
-		boost::dynamic_bitset<>* genome = nullptr;
+		std::vector<boost::dynamic_bitset<>> genome;
+		std::vector<int> genome_lengths;
 	};
 }
-

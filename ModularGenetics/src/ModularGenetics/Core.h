@@ -1,11 +1,6 @@
 #pragma once
-
-#ifdef MDLG_PLATFORM_WINDOWS
-	#ifdef MDLG_BUILD_DLL
-		#define MDLG_API __declspec(dllexport)
-	#else
-		#define MDLG_API __declspec(dllimport)
-	#endif
+#ifdef MDLG_BUILD_DLL
+	#define MDLG_API __declspec(dllexport)
 #else
-	#error Modular Genetics is only supported on Windows!
-#endif 
+	#define MDLG_API __declspec(dllimport)
+#endif
