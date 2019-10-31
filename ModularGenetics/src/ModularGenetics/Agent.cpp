@@ -4,11 +4,6 @@
 
 namespace MDLG
 {
-	Agent::Agent(std::vector<int> genome_lengths)
-	{
-		this->genome_lengths = genome_lengths;
-	}
-
 	Agent::Agent()
 	{
 	}
