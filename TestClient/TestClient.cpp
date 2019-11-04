@@ -4,25 +4,75 @@
 #include "pch.h"
 #include <iostream>
 #include "ModularGenetics.h"
-#include <boost\dynamic_bitset.hpp>
 #include <string>
+#include <boost\dynamic_bitset.hpp>
 #include <chrono>
 #include <random>
 
+using namespace MDLG;
+
+void test();
+
 int main()
 {
-	boost::dynamic_bitset<> seq1(std::string("111111"));
-	boost::dynamic_bitset<> seq2(std::string("000000"));
+	std::cin.get();
+	test();
+	std::cin.get();
+}
 
-	std::mt19937 rng(12387);
+void test()
+{
+	std::mt19937 rng(78321);
+	std::vector<std::tuple<double, Agent*>> agents;
 
-	auto result = MDLG::GeneticSequence::Crossover(rng, 3, seq1, seq2);
-
-	std::cout << result[0] << std::endl;
-	std::cout << result[1] << std::endl;
-
-	MDLG::GeneticSequence::Mutate(rng, result[1], .5);
-	std::cout << result[1] << std::endl;
+	std::uniform_real_distribution<> dist(0, 100);
 
 	std::cin.get();
+
+	for (int i = 0; i < 100; i++)
+	{
+		Agent* new_agent = new Agent();
+		new_agent->AddSequence(10);
+		new_agent->AddSequence(20);
+		new_agent->AddSequence(30);
+		new_agent->SetRandomGenome(rng);
+
+		agents.push_back(std::tuple<double, Agent*>{ dist(rng), new_agent });
+	}
+
+	std::cin.get();
+
+	std::vector<Agent*> child_agents;
+	for (int i = 0; i < 100; i++)
+	{
+		Agent* new_agent = new Agent();
+		new_agent->AddSequence(10);
+		new_agent->AddSequence(20);
+		new_agent->AddSequence(30);
+		child_agents.push_back(new_agent);
+	}
+
+	std::cin.get();
+
+	EvolutionClient::BreedGeneration(rng, agents, child_agents, 5, .01);
+
+	for (int i = 0; i < child_agents[0]->get_genome()->size(); i++)
+	{
+		std::string result;
+		boost::to_string((*child_agents[0]->get_genome())[i], result);
+
+		std::cout << result << std::endl;
+	}
+
+	std::cin.get();
+
+	for (int i = 0; i < agents.size(); i++)
+	{
+		delete std::get<1>(agents[i]);
+	}
+
+	for (int i = 0; i < child_agents.size(); i++)
+	{
+		delete child_agents[i];
+	}
 }

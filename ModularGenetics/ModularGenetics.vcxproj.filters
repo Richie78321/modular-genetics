@@ -27,6 +27,9 @@
     <ClInclude Include="src\ModularGenetics\GeneticSequence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ModularGenetics\EvolutionClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ModularGenetics\GeneticSequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModularGenetics\EvolutionClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

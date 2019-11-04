@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ModularGenetics\EvolutionClient.h" />
     <ClInclude Include="src\ModularGenetics\GeneticSequence.h" />
     <ClInclude Include="src\ModularGenetics\Agent.h" />
     <ClInclude Include="src\ModularGenetics.h" />
@@ -126,6 +127,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ModularGenetics\EvolutionClient.cpp" />
     <ClCompile Include="src\ModularGenetics\GeneticSequence.cpp" />
     <ClCompile Include="src\ModularGenetics\Agent.cpp" />
   </ItemGroup>
